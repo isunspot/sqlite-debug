@@ -1,0 +1,74 @@
+-- SQL for All table
+
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS Cars;
+CREATE TABLE Cars(Id INTEGER PRIMARY KEY, Name TEXT, Price INTEGER);
+INSERT INTO Cars VALUES(1,'Audi',52642);
+INSERT INTO Cars VALUES(2,'Mercedes',57127);
+INSERT INTO Cars VALUES(3,'Skoda',9000);
+INSERT INTO Cars VALUES(4,'Volvo',29000);
+INSERT INTO Cars VALUES(5,'Bentley',350000);
+INSERT INTO Cars VALUES(6,'Citroen',21000);
+INSERT INTO Cars VALUES(7,'Hummer',41400);
+INSERT INTO Cars VALUES(8,'Volkswagen',21600);
+
+DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders(Id INTEGER PRIMARY KEY, 
+                 OrderPrice INTEGER CHECK(OrderPrice>0), Customer TEXT);
+INSERT INTO Orders VALUES(1,1200,'Williamson');
+INSERT INTO Orders VALUES(2,200,'Robertson');
+INSERT INTO Orders VALUES(3,40,'Robertson');
+INSERT INTO Orders VALUES(4,1640,'Smith');
+INSERT INTO Orders VALUES(5,100,'Robertson');
+INSERT INTO Orders VALUES(6,50,'Williamson');
+INSERT INTO Orders VALUES(7,150,'Smith');
+INSERT INTO Orders VALUES(8,250,'Smith');
+INSERT INTO Orders VALUES(9,840,'Brown');
+INSERT INTO Orders VALUES(10,440,'Black');
+INSERT INTO Orders VALUES(11,20,'Brown');
+
+DROP TABLE IF EXISTS Friends;
+CREATE TABLE Friends(Id INTEGER PRIMARY KEY, Name TEXT UNIQUE NOT NULL, 
+                     Sex TEXT CHECK(Sex IN ('M', 'F')));
+INSERT INTO Friends VALUES(1,'Jane','F');
+INSERT INTO Friends VALUES(2,'Thomas','M');
+INSERT INTO Friends VALUES(3,'Franklin','M');
+INSERT INTO Friends VALUES(4,'Elisabeth','F');
+INSERT INTO Friends VALUES(5,'Mary','F');
+INSERT INTO Friends VALUES(6,'Lucy','F');
+INSERT INTO Friends VALUES(7,'Jack','M');
+
+DROP TABLE IF EXISTS Customers;
+CREATE TABLE Customers(CustomerId INTEGER PRIMARY KEY, Name TEXT);
+INSERT INTO Customers VALUES(1,'Paul Novak');
+INSERT INTO Customers VALUES(2,'Terry Neils');
+INSERT INTO Customers VALUES(3,'Jack Fonda');
+INSERT INTO Customers VALUES(4,'Tom Willis');
+
+DROP TABLE IF EXISTS Reservations;
+CREATE TABLE Reservations(Id INTEGER PRIMARY KEY, 
+    CustomerId INTEGER, Day TEXT);
+INSERT INTO Reservations VALUES(1,1,'2009-22-11');
+INSERT INTO Reservations VALUES(2,2,'2009-28-11');
+INSERT INTO Reservations VALUES(3,2,'2009-29-11');
+INSERT INTO Reservations VALUES(4,1,'2009-29-11');
+INSERT INTO Reservations VALUES(5,3,'2009-02-12');
+
+DROP TABLE IF EXISTS Authors;
+CREATE TABLE Authors(AuthorId INTEGER PRIMARY KEY, Name TEXT);
+INSERT INTO Authors VALUES(1,'Jane Austen');
+INSERT INTO Authors VALUES(2,'Leo Tolstoy');
+INSERT INTO Authors VALUES(3,'Joseph Heller');
+INSERT INTO Authors VALUES(4,'Charles Dickens');
+
+DROP TABLE IF EXISTS Books;
+CREATE TABLE Books(BookId INTEGER PRIMARY KEY, Title TEXT, AuthorId INTEGER, 
+    FOREIGN KEY(AuthorId) REFERENCES Authors(AuthorId));
+INSERT INTO Books VALUES(1,'Emma',1);
+INSERT INTO Books VALUES(2,'War and Peace',2);
+INSERT INTO Books VALUES(3,'Catch XII',3);
+INSERT INTO Books VALUES(4,'David Copperfield',4);
+INSERT INTO Books VALUES(5,'Good as Gold',3);
+INSERT INTO Books VALUES(6,'Anna Karenia',2);
+COMMIT;
