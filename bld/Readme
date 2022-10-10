@@ -2,3 +2,28 @@ The sqlite3 command line tool
 https://zetcode.com/db/sqlite/tool/
 SQLite 教程
 https://geek-docs.com/sqlite/sqlite-tutorial/sqlite-tutorial.html
+
+isunspot@192 bld % ./sqlite3 all.db
+SQLite version 3.40.0 2022-09-28 19:14:01
+Enter ".help" for usage hints.
+sqlite> .read all.sql
+sqlite> .databases
+main: /Users/isunspot/Downloads/SQL/sqlite/bld/all.db r/w
+sqlite> .tables
+Authors       Cars          Friends       Reservations
+Books         Customers     Orders
+sqlite> .exit
+isunspot@192 bld % ./sqlite3 all.db
+SQLite version 3.40.0 2022-09-28 19:14:01
+Enter ".help" for usage hints.
+sqlite> .version
+SQLite 3.40.0 2022-09-28 19:14:01 f25cf63471cbed1edb27591e57fead62550d4046dbdcb61312288f0f6f24c646
+zlib version 1.2.11
+clang-14.0.0
+sqlite> SELECT Name, Day FROM Customers AS C JOIN Reservations AS R ON C.CustomerId=R.CustomerId;
+Paul Novak|2009-22-11
+Terry Neils|2009-28-11
+Terry Neils|2009-29-11
+Paul Novak|2009-29-11
+Jack Fonda|2009-02-12
+sqlite> .exit
